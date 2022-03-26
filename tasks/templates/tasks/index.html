@@ -5,7 +5,21 @@
     <title>Tasks</title>
 </head>
 <body>
-    <h1>Tasks Index</h1>
-    <a href="{% url 'tasks:index' %}">go to index</a>
+<h1>Tasks Index</h1>
+
+<ul>
+    {% for task in tasks %}
+        <li>{{ task }}</li>
+    {% endfor %}
+
+</ul>
+
+<form action="{% url 'tasks:index' %}" method="post">
+    {% csrf_token %}
+    {{ task_form.as_p }}
+    <button>submit</button>
+</form>
+
+<a href="{% url 'tasks:index' %}">go to index</a>
 </body>
 </html>
