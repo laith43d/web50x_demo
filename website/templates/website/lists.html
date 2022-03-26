@@ -1,0 +1,31 @@
+{% extends 'website/layout.html' %}
+
+
+{% block content %}
+    <h1>Greeting my fellows</h1>
+    {% if condition %}
+        <h1 class="true">Yes</h1>
+    {% else %}
+        <h1 class="false">No</h1>
+    {% endif %}
+
+    <ul>
+        {% for n in list_of_names %}
+            {% if n == 'Dhay' %}
+                {{ n }}
+            {% else %}
+                <li>{{ n }}</li>
+            {% endif %}
+        {% endfor %}
+
+    </ul>
+
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+    </form>
+
+    <a href="{% url 'website:say-hi' 'n' %}">to to say hi</a>
+
+{% endblock content %}

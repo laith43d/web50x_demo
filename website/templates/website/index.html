@@ -1,0 +1,41 @@
+
+
+{% extends 'website/layout.html' %}
+
+{% block extra_header %}
+    <style>
+        .whatever {
+            color: brown;
+        }
+    </style>
+{% endblock extra_header %}
+
+{% block content %}
+    <h1>Greeting my fellows</h1>
+    <h1>Hello {{ name }}</h1>
+    {% if condition %}
+        <h1 class="true">True</h1>
+    {% else %}
+        <h1 class="false">False</h1>
+    {% endif %}
+
+    <ul>
+        {% for n in list_of_names %}
+            {% if n == 'Dhay' %}
+                {{ n }}
+            {% else %}
+                <li class="whatever">{{ n }}</li>
+            {% endif %}
+        {% empty %}
+            Nothing to show
+        {% endfor %}
+
+    </ul>
+
+    <a href="{% url 'website:index' %}">back to index</a>
+    <a href="{% url 'tasks:index' %}">to to tasks index</a>
+
+    {% now "Y-m-d" as current_year %}
+    {{ current_year }}
+
+{% endblock content %}
