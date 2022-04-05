@@ -1,0 +1,41 @@
+{% extends 'flights/layout/base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <form action="{% url 'flights:passenger-create' %}" method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-6">
+                        {{ passenger_form.first|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ passenger_form.last|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    {{ passenger_form.flights|as_crispy_field }}
+                </div>
+
+
+                <button class="btn btn-primary btn-lg" type="submit">Create</button>
+            </form>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block extra_scripts %}
+    <script src="{% static 'libs/tom-select/dist/js/tom-select.base.min.js' %}"></script>
+
+    <script>
+        new TomSelect("#id_flights", {
+            maxItems: null
+        });
+    </script>
+{% endblock %}

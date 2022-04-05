@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en">
+{% include 'flights/includes/header.html' %}
+{% block extra_header %}
+
+{% endblock extra_header %}
+<body class="theme-light">
+<div class="page">
+
+    <div class="page-wrapper">
+        <div class="container-xl">
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+
+
+    </div>
+</div>
+
+{% include 'flights/includes/scripts.html' %}
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}
+
+</body>
+</html>

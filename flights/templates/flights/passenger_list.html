@@ -1,0 +1,66 @@
+{% extends 'flights/layout/base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Passenger</h3>
+        </div>
+        <div class="card-body border-bottom py-3">
+            <div class="d-flex">
+                <div>
+                    <a class="btn btn-secondary" href="{% url 'flights:passenger-create' %}">Create Passenger</a>
+                </div>
+
+                <div class="ms-auto text-muted">
+                    Search:
+                    <div class="ms-2 d-inline-block">
+                        <form action="" method="get">
+                            <input type="text" class="form-control form-control-sm" name="q">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap datatable">
+                <thead>
+                <tr>
+
+                    <th>Passenger Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+
+                    <th>Flights</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for passenger in passengers %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'flights:passenger-update' passenger.id %}">{{ passenger.id }}</a>
+                        </td>
+                        <td>{{ passenger.first }}</td>
+                        <td>{{ passenger.last }}</td>
+
+                        <td>
+                            <ul>
+                                {% for flight in passenger.flights.all %}
+                                    <li>{{ flight }}</li>
+                                {% endfor %}
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,62 @@
+{% extends 'flights/layout/base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Flights</h3>
+        </div>
+        <div class="card-body border-bottom py-3">
+            <div class="d-flex">
+                <div>
+                    <a class="btn btn-primary" href="{% url 'flights:flight-create' %}">Create Flight</a>
+                    <a class="btn btn-secondary" href="{% url 'flights:passenger-create' %}">Create Passenger</a>
+                </div>
+
+                <div class="ms-auto text-muted">
+                    Search:
+                    <div class="ms-2 d-inline-block">
+                        <form action="" method="get">
+                            <input type="text" class="form-control form-control-sm" name="q">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap datatable">
+                <thead>
+                <tr>
+
+                    <th>Flight Number</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for flight in flights %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'flights:flight-update' flight.id %}">{{ flight.id }}</a>
+                        </td>
+                        <td>{{ flight.origin }}</td>
+                        <td>{{ flight.destination }}</td>
+                        <td>{{ flight.date|date:'Y-m-d h:m a' }}</td>
+                        <td>{{ flight.duration }}</td>
+                        <td>$ {{ flight.price }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}
+

@@ -4,13 +4,13 @@ from tasks.forms import TaskForm
 
 tasks = ['buy milk', 'buy juice']
 
+
 def index(request):
     task_form = TaskForm()
 
     if request.method == 'POST':
         task_form = TaskForm(request.POST)
         if task_form.is_valid():
-
             print(request.POST.get('name'))
             print(task_form.cleaned_data['name'])
 
