@@ -10,9 +10,7 @@ from flights.models import Flight, Passenger
 @login_required
 def index(request):
     flights = Flight.objects.all()
-    q = request.GET.get('q')
-
-    if q:
+    if q := request.GET.get('q'):
         try:
             q = int(q)
             flights = flights.filter(
@@ -44,9 +42,11 @@ def login_view(request):
         #     return redirect('flights:index')
 
         if form.is_valid():
-            user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-
-            if user:
+            if user := authenticate(
+                request,
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            ):
                 login(request, user)
                 return redirect('flights:index')
 
@@ -112,8 +112,7 @@ def flight_update(request, flight_id):
 @login_required
 def passenger_list(request):
     passengers = Passenger.objects.all()
-    q = request.GET.get('q')
-    if q:
+    if q := request.GET.get('q'):
         passengers = passengers.filter(
             Q(first__icontains=q) |
             Q(last__icontains=q)

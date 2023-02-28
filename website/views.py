@@ -13,13 +13,9 @@ def index(request):
         name_form = NameForm(request.POST)
         if name_form.is_valid():
             print(name_form)
-            return redirect('website:say-hi', 'Layth')
         else:
             print('+++++++++++++++++ Invalid form submit')
-            return redirect('website:say-hi', 'Layth')
-
-
-
+        return redirect('website:say-hi', 'Layth')
     return render(request, 'website/lists.html', context={
         'condition': condition,
         'list_of_names': list_of_names,
